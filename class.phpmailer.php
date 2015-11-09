@@ -2101,11 +2101,6 @@ class PHPMailer
 
         $bodyEncoding = $this->Encoding;
         $bodyCharSet = $this->CharSet;
-        //Can we do a 7-bit downgrade?
-        if ($bodyEncoding == '8bit' and !$this->has8bitChars($this->Body)) {
-            $bodyEncoding = '7bit';
-            $bodyCharSet = 'us-ascii';
-        }
         //If lines are too long, and we're not already using an encoding that will shorten them,
         //change to quoted-printable transfer encoding
         if ('base64' != $this->Encoding and self::hasLineLongerThanMax($this->Body)) {
@@ -2115,11 +2110,6 @@ class PHPMailer
 
         $altBodyEncoding = $this->Encoding;
         $altBodyCharSet = $this->CharSet;
-        //Can we do a 7-bit downgrade?
-        if ($altBodyEncoding == '8bit' and !$this->has8bitChars($this->AltBody)) {
-            $altBodyEncoding = '7bit';
-            $altBodyCharSet = 'us-ascii';
-        }
         //If lines are too long, change to quoted-printable transfer encoding
         if (self::hasLineLongerThanMax($this->AltBody)) {
             $altBodyEncoding = 'quoted-printable';
